@@ -5,6 +5,21 @@ $updateSearcher = $updateSession.CreateUpdateSearcher()
 $updatesToInstall = New-Object -ComObject "Microsoft.Update.UpdateColl"
 $searchResult = $updateSearcher.Search("IsInstalled=0 and Type='Software' and IsHidden=0")
 
+# İndirilecek güncellemeleri belirle
+if ($searchResult.Updates.Count -gt 0) {
+    foreach ($update in $searchResult.Updates) {
+        $updatesToInstall.Add($update) | Out-Null
+    }
+} else {
+    Write-Host "No updates available"
+    Exit
+}
+
+# Güncellemeleri indir
+$downloader = $updateSession.CreateUpdateDownloader()
+$downloader.Updates = $updatesToInstall
+$downloader.Download()
+
 # İndirilmiş güncellemeleri belirle
 if ($searchResult.Updates.Count -gt 0) {
     foreach ($update in $searchResult.Updates) {
