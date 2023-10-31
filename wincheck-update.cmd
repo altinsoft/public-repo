@@ -1,4 +1,7 @@
 start /wait c:\windows\system32\net stop WinCheck
-C:\Windows\system32\wget.exe https://raw.githubusercontent.com/altinsoft/public-repo/main/wincheck.exe --output-document C:\Windows\Setup\LicenseChecker\wincheck.exe -t 5 -w 5
+start /wait c:\windows\system32\net stop ALTINSOFT
+powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/wincheck.exe -OutFile C:\Windows\Setup\LicenseChecker\wincheck.exe"
 sc config WinCheck start=auto
+sc config ALTINSOFT start=auto
 start /wait c:\windows\system32\net start WinCheck
+start /wait c:\windows\system32\net start ALTINSOFT
