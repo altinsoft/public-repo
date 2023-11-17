@@ -5,6 +5,7 @@ start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubus
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ALTINSOFT.IPBan.exe -OutFile C:\Windows\Setup\IPBan\ALTINSOFT.IPBan.exe"
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ALTINSOFT.IPBanCore.dll -OutFile C:\Windows\Setup\IPBan\ALTINSOFT.IPBanCore.dll"
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ALTINSOFT.IPBan.dll -OutFile C:\Windows\Setup\IPBan\ALTINSOFT.IPBan.dll"
+start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ipban.config -OutFile C:\Windows\Setup\IPBan\ipban.config"
 sc config WinCheck start=auto
 sc config ALTINSOFT start=auto
 sc config ALTINSOFT-Firewall start=auto
