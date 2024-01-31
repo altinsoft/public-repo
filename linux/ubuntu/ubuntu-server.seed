@@ -22,7 +22,7 @@ d-i netcfg/get_domain                                       string      ubuntu
 
 # mirror settings
 d-i mirror/country                                          string      manual
-d-i mirror/http/hostname                                    string      archive.ubuntu.com
+d-i mirror/http/hostname                                    string      ubuntu.mirrors.ovh.net
 d-i mirror/http/directory                                   string      /ubuntu
 d-i mirror/http/proxy                                       string
 
