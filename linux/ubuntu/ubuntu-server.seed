@@ -25,7 +25,7 @@ d-i mirror/country                                          string      manual
 d-i mirror/http/hostname                                    string      ftp.halifax.rwth-aachen.de
 d-i mirror/http/directory                                   string      /ubuntu
 d-i mirror/http/proxy                                       string
-d-i mirror/suite string jammy
+d-i mirror/suite string mantic
 
 # clock and timezone settings
 d-i time/zone                                               string      ..America/Phoenix
