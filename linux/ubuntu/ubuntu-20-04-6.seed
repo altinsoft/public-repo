@@ -39,7 +39,7 @@ d-i passwd/user-default-groups                              string      adm cdro
 d-i user-setup/encrypt-home                                 boolean     false
 
 # user setup
-d-i passwd/user-fullname string ALTINSOFT Ubuntu 18.04
+d-i passwd/user-fullname string ALTINSOFT
 d-i passwd/username string altinsoft
 d-i passwd/user-password password Arc12345678//
 d-i passwd/user-password-again password Arc12345678//
@@ -60,6 +60,7 @@ tasksel tasksel/first                                       multiselect Basic Ub
 d-i pkgsel/upgrade                                          select      safe-upgrade
 d-i pkgsel/update-policy                                    select      none
 d-i pkgsel/updatedb                                         boolean     true
+d-i pkgsel/include                                          string      openssh-server, curl, nano, ubuntu-minimal, wget
 
 # disk partitioning
 d-i partman/confirm_write_new_label                         boolean     true
