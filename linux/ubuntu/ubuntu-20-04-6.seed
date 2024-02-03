@@ -25,7 +25,6 @@ d-i mirror/country                                          string      manual
 d-i mirror/http/hostname                                    string      ftp.halifax.rwth-aachen.de
 d-i mirror/http/directory                                   string      /ubuntu
 d-i mirror/http/proxy                                       string
-#d-i mirror/suite                                            string      stable
 
 # clock and timezone settings
 d-i time/zone                                               string      ..America/Phoenix
@@ -38,8 +37,8 @@ d-i user-setup/allow-password-weak                          boolean     false
 d-i passwd/user-default-groups                              string      adm cdrom dialout lpadmin plugdev sambashare
 d-i user-setup/encrypt-home                                 boolean     false
 d-i passwd/root-login                                       boolean     true
-d-i passwd/root-password                                    password Arc123//
-d-i passwd/root-password-again                              password Arc123//
+d-i passwd/root-password                                    password    Arc123//
+d-i passwd/root-password-again                              password    Arc123//
 
 # configure apt
 d-i apt-setup/restricted                                    boolean     true
