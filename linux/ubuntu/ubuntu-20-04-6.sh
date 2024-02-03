@@ -8,7 +8,7 @@ apt-get install update -y
 apt-get install upgrade -y 
 apt-get dist-upgrade -y
 apt -y autoremove
-osid=21
+osid=16
 apiurl=https://www.altinsoft.net/linux-vds-service
 apiurl2=https://www.altinsoft.com/linux-vds-service
 mac=`cat /sys/class/net/ens32/address`;
