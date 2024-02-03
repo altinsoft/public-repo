@@ -39,15 +39,15 @@ d-i passwd/user-default-groups                              string      adm cdro
 d-i user-setup/encrypt-home                                 boolean     false
 
 # user setup
-d-i passwd/user-fullname string ALTINSOFT
-d-i passwd/username string altinsoft
-d-i passwd/user-password password Arc12345678//
-d-i passwd/user-password-again password Arc12345678//
+#d-i passwd/user-fullname string ALTINSOFT
+#d-i passwd/username string altinsoft
+#d-i passwd/user-password password Arc12345678//
+#d-i passwd/user-password-again password Arc12345678//
 
+d-i passwd/make-user boolean false
 d-i passwd/root-login boolean true
 d-i passwd/root-password password Arc123//
 d-i passwd/root-password-again password Arc123//
-
 
 # configure apt
 d-i apt-setup/restricted                                    boolean     true
