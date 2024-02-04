@@ -8,6 +8,8 @@ apt-get install update -y
 apt-get install upgrade -y 
 apt-get dist-upgrade -y
 apt -y autoremove
+sudo sh -c 'echo GRUB_RECORDFAIL_TIMEOUT=3 >> /etc/default/grub';
+sudo update-grub;
 osid=16
 apiurl=https://www.altinsoft.net/linux-vds-service
 apiurl2=https://www.altinsoft.com/linux-vds-service
