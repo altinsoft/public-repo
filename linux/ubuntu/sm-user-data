@@ -3,5 +3,5 @@ apt_update: true
 apt_upgrade: true
 #packages: [ bzr, pastebinit, ubuntu-dev-tools, ccache, bzr-builddeb, vim-nox, git-core, lftp ]
 disable_root: False
-password: Arc123//
+password: Arc125//
 chpasswd: { expire: False }
