@@ -1,1 +1,19 @@
-bmV0d29yazoKICB2ZXJzaW9uOiAyCiAgcmVuZGVyZXI6IG5ldHdvcmtkCiAgZXRoZXJuZXRzOgogICAgZW5zMzM6CiAgICAgIGFkZHJlc3NlczoKICAgICAgICAtIDE5Mi4xNjguNC41OC8yNAogICAgICByb3V0ZXM6CiAgICAgICAgLSB0bzogMC4wLjAuMC8wCiAgICAgICAgICB2aWE6IDE5Mi4xNjguNC4xCiAgICAgICAgICBvbi1saW5rOiB0cnVlCiAgICAgIGRoY3A0OiBubwogICAgICBkaGNwNjogbm8KICAgICAgbmFtZXNlcnZlcnM6CiAgICAgICAgYWRkcmVzc2VzOgogICAgICAgICAgLSAxOTIuMTY4LjQuMQogICAgICAgIHNlYXJjaDoKICAgICAgICAgIC0gbGFiLmxvY2FsCiAgICAgIG9wdGlvbmFsOiB0cnVl
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      addresses:
+        - 192.168.4.58/24
+      routes:
+        - to: 0.0.0.0/0
+          via: 192.168.4.1
+          on-link: true
+      dhcp4: no
+      dhcp6: no
+      nameservers:
+        addresses:
+          - 192.168.4.1
+        search:
+          - lab.local
+      optional: true
