@@ -15,4 +15,3 @@ network:
           - 192.168.4.1
         search:
           - lab.local
-      optional: true
