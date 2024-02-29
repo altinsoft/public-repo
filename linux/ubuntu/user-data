@@ -1,1 +1,22 @@
-I2Nsb3VkLWNvbmZpZwp3cml0ZV9maWxlczoKLSBwYXRoOiAvZXRjL3N5c2N0bC5kLzYwLWRpc2FibGUtaXB2Ni5jb25mCiAgb3duZXI6IHJvb3QKICBjb250ZW50OiB8CiAgICBuZXQuaXB2Ni5jb25mLmFsbC5kaXNhYmxlX2lwdjY9MQogICAgbmV0LmlwdjYuY29uZi5kZWZhdWx0LmRpc2FibGVfaXB2Nj0xCnJ1bmNtZDoKLSBuZXRwbGFuIC0tZGVidWcgYXBwbHkKLSBzeXNjdGwgLXcgbmV0LmlwdjYuY29uZi5hbGwuZGlzYWJsZV9pcHY2PTEKLSBzeXNjdGwgLXcgbmV0LmlwdjYuY29uZi5kZWZhdWx0LmRpc2FibGVfaXB2Nj0xCi0gYXB0LWdldCAteSB1cGRhdGUKLSBhcHQtZ2V0IC15IGNsZWFuCi0gYXB0LWdldCAteSBhdXRvcmVtb3ZlIC0tcHVyZ2UKdGltZXpvbmU6IFVUQwpwYWNrYWdlX3VwZ3JhZGU6IHRydWUKcGFja2FnZV9yZWJvb3RfaWZfcmVxdWlyZWQ6IHRydWUKcG93ZXJfc3RhdGU6CiAgZGVsYXk6IG5vdwogIG1vZGU6IHJlYm9vdAogIG1lc3NhZ2U6IFJlYm9vdGluZyB0aGUgT1MKICBjb25kaXRpb246IGlmIFsgLWUgL3Zhci9ydW4vcmVib290LXJlcXVpcmVkIF07IHRoZW4gZXhpdCAwOyBlbHNlIGV4aXQgMTsgZmk
+#cloud-config
+write_files:
+- path: /etc/sysctl.d/60-disable-ipv6.conf
+  owner: root
+  content: |
+    net.ipv6.conf.all.disable_ipv6=1
+    net.ipv6.conf.default.disable_ipv6=1
+runcmd:
+- netplan --debug apply
+- sysctl -w net.ipv6.conf.all.disable_ipv6=1
+- sysctl -w net.ipv6.conf.default.disable_ipv6=1
+- apt-get -y update
+- apt-get -y clean
+- apt-get -y autoremove --purge
+timezone: UTC
+package_upgrade: true
+package_reboot_if_required: true
+power_state:
+  delay: now
+  mode: reboot
+  message: Rebooting the OS
+  condition: if [ -e /var/run/reboot-required ]; then exit 0; else exit 1; fi
