@@ -1,17 +1,1 @@
-#ami-id: ami-fd4aa494
-#ami-launch-index: '0'
-#ami-manifest-path: ubuntu-images-us/ubuntu-lucid-10.04-amd64-server-20100427.1.manifest.xml
-#block-device-mapping: {ami: sda1, ephemeral0: sdb, ephemeral1: sdc, root: /dev/sda1}
-hostname: altinsoft
-#instance-action: none
-#instance-id: i-87018aed
-#instance-type: m1.large
-#kernel-id: aki-c8b258a1
-#local-hostname: smoser-sys.mosers.us
-#local-ipv4: 10.223.26.178
-#placement: {availability-zone: us-east-1d}
-#public-hostname: ec2-184-72-174-120.compute-1.amazonaws.com
-#public-ipv4: 184.72.174.120
-#public-keys:
-#reservation-id: r-e2225889
-#security-groups: default
+bmV0d29yazoKICB2ZXJzaW9uOiAyCiAgcmVuZGVyZXI6IG5ldHdvcmtkCiAgZXRoZXJuZXRzOgogICAgZW5zMzM6CiAgICAgIGFkZHJlc3NlczoKICAgICAgICAtIDE5Mi4xNjguNC41OC8yNAogICAgICByb3V0ZXM6CiAgICAgICAgLSB0bzogMC4wLjAuMC8wCiAgICAgICAgICB2aWE6IDE5Mi4xNjguNC4xCiAgICAgICAgICBvbi1saW5rOiB0cnVlCiAgICAgIGRoY3A0OiBubwogICAgICBkaGNwNjogbm8KICAgICAgbmFtZXNlcnZlcnM6CiAgICAgICAgYWRkcmVzc2VzOgogICAgICAgICAgLSAxOTIuMTY4LjQuMQogICAgICAgIHNlYXJjaDoKICAgICAgICAgIC0gbGFiLmxvY2FsCiAgICAgIG9wdGlvbmFsOiB0cnVl
