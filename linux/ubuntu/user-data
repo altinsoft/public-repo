@@ -3,15 +3,6 @@ runcmd:
 - apt-get -y update
 - apt-get -y clean
 - apt-get -y autoremove --purge
-timezone: UTC
-package_upgrade: true
-package_reboot_if_required: true
-power_state:
-  delay: now
-  mode: reboot
-  message: Rebooting the OS
-  condition: if [ -e /var/run/reboot-required ]; then exit 0; else exit 1; fi
-
 network:
   version: 2
   renderer: networkd
