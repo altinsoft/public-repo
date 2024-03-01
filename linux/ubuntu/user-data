@@ -11,3 +11,18 @@ power_state:
   mode: reboot
   message: Rebooting the OS
   condition: if [ -e /var/run/reboot-required ]; then exit 0; else exit 1; fi
+
+network:
+  version: 2
+  renderer: networkd
+  ethernets:
+    ens33:
+      dhcp4: false
+      dhcp6: false
+      addresses:
+        - 192.168.1.100/24
+      gateway4: 192.168.1.1
+      nameservers:
+        addresses:
+          - 8.8.8.8
+          - 8.8.4.4
