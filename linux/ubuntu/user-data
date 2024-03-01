@@ -1,9 +1,9 @@
 #cloud-config
 runcmd:
-- apt-get update -y
-- apt-get upgrade -y
-- apt-get autoremove --purge -y
-- apt-get clean
+  - apt-get update
+  - apt-get upgrade -y
+  - apt-get autoremove --purge -y
+  - apt-get clean
 network:
   version: 2
   renderer: networkd
