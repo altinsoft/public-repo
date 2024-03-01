@@ -5,6 +5,7 @@ runcmd:
   - apt-get autoremove --purge -y
   - apt-get clean
 
+#network-config
 network:
   version: 2
   renderer: networkd
