@@ -1,4 +1,23 @@
----
+Content-Type: multipart/mixed; boundary="MIMEBOUNDARY"
+MIME-Version: 1.0
+
+--MIMEBOUNDARY
+Content-Type: text/cloud-config; charset="utf-8"
+MIME-Version: 1.0
+Content-Disposition: attachment; filename="cloud-config.txt"
+
+#cloud-config
+runcmd:
+  - apt-get update
+  - apt-get upgrade -y
+  - apt-get autoremove --purge -y
+  - apt-get clean
+
+--MIMEBOUNDARY
+Content-Type: text/cloud-config; charset="utf-8"
+MIME-Version: 1.0
+Content-Disposition: attachment; filename="network-config.txt"
+
 network:
   version: 2
   renderer: networkd
@@ -15,3 +34,5 @@ network:
         addresses:
           - 8.8.8.8
           - 8.8.4.4
+
+--MIMEBOUNDARY--
