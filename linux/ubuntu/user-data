@@ -1,6 +1,12 @@
-#user-data
+#cloud-config
 runcmd:
   - apt-get update
   - apt-get upgrade -y
   - apt-get autoremove --purge -y
   - apt-get clean
+
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
