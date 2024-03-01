@@ -1,7 +1,7 @@
 #cloud-config
 runcmd:
   - echo "Hello, {{ user_name }}!"
-#cloud-config  
+#network-config  
 network:
   version: 2
   renderer: networkd
