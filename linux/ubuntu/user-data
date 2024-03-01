@@ -1,4 +1,4 @@
-#network-config
+#cloud-config
 network:
   version: 2
   renderer: networkd
