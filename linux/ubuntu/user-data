@@ -8,7 +8,7 @@ network:
   version: 2
   renderer: networkd
   ethernets:
-    ens33:
+    eth0:
       dhcp4: false
       dhcp6: false
       addresses:
