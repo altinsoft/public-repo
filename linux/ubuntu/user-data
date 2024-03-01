@@ -1,4 +1,4 @@
-#cloud-config
+#user-data
 runcmd:
   - apt-get update
   - apt-get upgrade -y
