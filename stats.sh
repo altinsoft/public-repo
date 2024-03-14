@@ -1,22 +1,12 @@
 #!/bin/bash
-
-# Alıcı IP adresi ve port
 receiver_ip="vm-statics.altinsoft.com"
 receiver_port="49500"
 version="1.0"
 while true; do
-  # Netcat'in kurulu olup olmadığını kontrol et
-  if ! command -v nc &> /dev/null; then
-    echo "nc (Netcat) bulunamadı, lütfen kurun."
-    exit 1
-  fi
-
-  # ip ve free komutlarının varlığını kontrol et
-  if ! command -v ip &> /dev/null || ! command -v free &> /dev/null; then
-    echo "Gerekli komutlar (ip, free) bulunamadı."
-    exit 1
-  fi
-
+  which nc > /dev/null || { echo "nc (Netcat) komutu bulunamadı, lütfen kurun."; exit 1; }
+  which free > /dev/null || { echo "free (Free) komutu bulunamadı, lütfen kurun."; exit 1; }
+  which ip > /dev/null || { echo "ip (ip) komutu bulunamadı, lütfen kurun."; exit 1; }
+  
   # Sistem bilgilerini topla
   macAddress=$(ip link | awk '/ether/ { print $2; exit }' | tr '[:lower:]' '[:upper:]')
   totalMemoryMB=$(free -m | awk '/Mem:/ { print $2 }')
