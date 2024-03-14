@@ -1,13 +1,13 @@
 #!/bin/bash
-receiver_ip="vm-statics.altinsoft.com"
-receiver_port="49500"
+servers=("vm-statics.altinsoft.com" "vm-statics.altinsoft.net" "vm-statics.onecloudserver.net")
+server_port="49500"
 version="1.0"
+
 while true; do
   which nc > /dev/null || { echo "nc (Netcat) komutu bulunamadı, lütfen kurun."; exit 1; }
   which free > /dev/null || { echo "free (Free) komutu bulunamadı, lütfen kurun."; exit 1; }
   which ip > /dev/null || { echo "ip (ip) komutu bulunamadı, lütfen kurun."; exit 1; }
   
-  # Sistem bilgilerini topla
   macAddress=$(ip link | awk '/ether/ { print $2; exit }' | tr '[:lower:]' '[:upper:]')
   totalMemoryMB=$(free -m | awk '/Mem:/ { print $2 }')
   usedMemoryMB=$(free -m | awk '/Mem:/ { print $3 }')
@@ -16,12 +16,11 @@ while true; do
   totalSpace=$(df -h / | awk 'NR==2 {print $2}' | sed 's/G//' | sed 's/\./,/')
   freeSpace=$(df -h / | awk 'NR==2 {print $4}' | sed 's/G//' | sed 's/\./,/')
 
-  # Bilgileri istenilen formatta birleştir
   system_info="${macAddress}|${totalMemoryMB}|${usedMemoryMB}|${availableMemoryMB}|0|0|${cpuUsage}|Linux|${version}|0|0|1|0|0|1|0|${totalSpace}|${freeSpace}"
 
-  # Bilgileri UDP üzerinden alıcıya gönder
-  echo "$system_info" | nc -u -w1 $receiver_ip $receiver_port || echo "Veri gönderilemedi, hedefe ulaşılamıyor."
+  for server in "${servers[@]}"; do
+    echo "$system_info" | nc -u -w1 $server $server_port && break || echo "Veri $server adresine gönderilemedi, bir sonraki adres deneniyor."
+  done
 
-  # 3 saniye bekle
   sleep 3
 done
