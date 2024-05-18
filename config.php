@@ -40,7 +40,7 @@ const LG_CUSTOM_HEADER_PHP = __DIR__.'/custom.header.php';
 const LG_CUSTOM_FOOTER_PHP = __DIR__.'/custom.footer.php';
 
 // Define the location of this network, usually a city and a country;
-const LG_LOCATION = 'Turkey/Istanbul';
+const LG_LOCATION = 'Turkey-Istanbul';
 // Define a query location for the link to openstreetmap (eg: Amsterdam, Netherlands will be https://www.openstreetmap.org/search?query=Amsterdam, Netherlands)
 const LG_MAPS_QUERY = 'Istanbul, Turkey';
 // Define the facility where the network is located, usually a data center;
