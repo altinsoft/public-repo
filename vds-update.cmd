@@ -13,7 +13,8 @@ start /wait PowerShell -Command "Install-Module -Name PSWindowsUpdate -Force -Sc
 start /wait PowerShell -Command "Import-Module PSWindowsUpdate"
 start /wait PowerShell -Command "Get-Module -Name PSWindowsUpdate -ListAvailable"
 start /wait PowerShell -Command "Get-WindowsUpdate"
-start /wait PowerShell -Command "Install-WindowsUpdate -AcceptAll -AutoReboot"
+start /wait PowerShell -Command "Install-WindowsUpdate -AcceptAll"
+start /wait PowerShell -Command "Get-WindowsUpdate"
 sc config WinCheck start=auto
 sc config ALTINSOFT-Firewall start=auto
 start /wait C:\Windows\Setup\ALTINSOFT\WindowsVdsTools.exe
