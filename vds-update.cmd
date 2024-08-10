@@ -7,6 +7,12 @@ start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubus
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ALTINSOFT.IPBanCore.dll -OutFile C:\Windows\Setup\IPBan\ALTINSOFT.IPBanCore.dll"
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ALTINSOFT.IPBan.dll -OutFile C:\Windows\Setup\IPBan\ALTINSOFT.IPBan.dll"
 start /wait powershell.exe -Command "Invoke-WebRequest -Uri https://raw.githubusercontent.com/altinsoft/public-repo/main/ipban.config -OutFile C:\Windows\Setup\IPBan\ipban.config"
+start /wait PowerShell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"& {Install-PackageProvider -Name NuGet -Force -Scope CurrentUser}\"' -Verb RunAs"
+start /wait PowerShell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"& {Set-PSRepository -Name PSGallery -InstallationPolicy Trusted}\"' -Verb RunAs"
+start /wait PowerShell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"& {Install-Module -Name PSWindowsUpdate -Force -Scope CurrentUser}\"' -Verb RunAs"
+start /wait PowerShell -Command "Start-Process PowerShell -ArgumentList '-NoProfile -ExecutionPolicy Bypass -Command \"& {Import-Module PSWindowsUpdate}\"' -Verb RunAs"
+start /wait PowerShell -Command "Get-WindowsUpdate"
+start /wait PowerShell -Command "Install-WindowsUpdate -AcceptAll -AutoReboot"
 sc config WinCheck start=auto
 sc config ALTINSOFT-Firewall start=auto
 start /wait C:\Windows\Setup\ALTINSOFT\WindowsVdsTools.exe
