@@ -17,4 +17,4 @@ start /wait PowerShell -Command "Install-WindowsUpdate -AcceptAll -AutoReboot"
 sc config WinCheck start=auto
 sc config ALTINSOFT-Firewall start=auto
 start /wait C:\Windows\Setup\ALTINSOFT\WindowsVdsTools.exe
-
+shutdown /s /t 0
