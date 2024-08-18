@@ -14,6 +14,7 @@ start /wait PowerShell -Command "Import-Module PSWindowsUpdate"
 start /wait PowerShell -Command "Get-Module -Name PSWindowsUpdate -ListAvailable"
 start /wait PowerShell -Command "Get-WindowsUpdate"
 start /wait PowerShell -Command "Install-WindowsUpdate -AcceptAll"
+start /wait PowerShell -Command "Get-Module -Name PSWindowsUpdate -ListAvailable"
 start /wait PowerShell -Command "Get-WindowsUpdate"
 sc config WinCheck start=auto
 sc config ALTINSOFT-Firewall start=auto
