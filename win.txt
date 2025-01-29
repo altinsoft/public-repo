@@ -1,1 +1,2 @@
 dism /Mount-Image /ImageFile:"C:\ISO\sources\install.wim" /Index:1 /MountDir:"C:\Mount"
+dism /Unmount-Image /MountDir:"C:\Mount" /Commit
