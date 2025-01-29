@@ -1,2 +1,2 @@
-dism /Mount-Image /ImageFile:"D:\sources\install.wim" /Index:1 /MountDir:"C:\Mount"
+dism /Mount-Image /ImageFile:"D:\sources\install.wim" /Index:1 /MountDir:"C:\Mount" /ReadOnly
 dism /Unmount-Image /MountDir:"C:\Mount" /discard
