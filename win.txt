@@ -1,0 +1,1 @@
+dism /Mount-Image /ImageFile:"C:\ISO\sources\install.wim" /Index:1 /MountDir:"C:\Mount"
