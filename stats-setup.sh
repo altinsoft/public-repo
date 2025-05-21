@@ -1,4 +1,9 @@
 #!/bin/bash
+systemctl stop stats.service
+rm -rf /usr/local/bin/stats.s
+rm -rf /etc/systemd/system/stats.service
+systemctl daemon-reload
+
 URL="https://raw.githubusercontent.com/altinsoft/public-repo/main/stats.sh"
 DOWNLOAD_PATH="/usr/local/bin/stats.sh"
 SERVICE_FILE="/etc/systemd/system/stats.service"
