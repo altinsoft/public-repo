@@ -30,6 +30,12 @@ sed -i 's|openssl-dev>3|openssl-dev>3 linux-pam-dev xmlsec-dev libxml2-dev|' APK
 sed -i '/--without-pam/d; /--without-xerces/d' APKBUILD
 sed -i '/rm -Rf .*etc\/pam.d/d' APKBUILD
 sed -i 's|^pkgrel=.*|pkgrel=100|' APKBUILD
+# open-vm-tools-openrc alt paketini KALDIR: bu tek apk, OVA build appliance'inin
+# gittigi Fastly edge'inde tutarli HTTP 404 veriyordu (diger 8 paket ayni Pages
+# dizininden iniyor). Alt paketi listeden cikarinca init.d/open-vm-tools ANA
+# pakete katlanir (abuild default openrc subpackage'i tasimaz) ve install_if
+# kalkar → openrc.apk hic fetch edilmez, 404 imkansiz hale gelir.
+sed -i '/\$pkgname-openrc/d' APKBUILD
 # 2 musl yamasi (Alpine vgauth kapali oldugu icin yamamamis) — prepare() override
 cat >> APKBUILD <<'EOF'
 prepare() {
@@ -52,11 +58,14 @@ VR="$(basename "$MAIN" | sed 's|^open-vm-tools-||; s|\.apk$||')"   # ornek: 13.0
 DEST="/work/alpine/v$AV/$ARCH"
 mkdir -p "$DEST"
 rm -f "$DEST"/*.apk "$DEST"/APKINDEX.tar.gz
+# NOT: open-vm-tools-openrc YOK — init.d artik ana pakete katlandi (yukari bak).
 for p in open-vm-tools open-vm-tools-guestinfo open-vm-tools-vix open-vm-tools-timesync \
          open-vm-tools-vmbackup open-vm-tools-hgfs open-vm-tools-deploypkg \
-         open-vm-tools-plugins-all open-vm-tools-openrc; do
+         open-vm-tools-plugins-all; do
 	cp "$SRC/${p}-${VR}.apk" "$DEST/"
 done
+# Eski openrc apk repoda kaldiysa temizle (artik index'te olmamali)
+rm -f "$DEST"/open-vm-tools-openrc-*.apk
 cd "$DEST"
 apk index -o APKINDEX.tar.gz *.apk
 abuild-sign APKINDEX.tar.gz
