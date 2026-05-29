@@ -1,0 +1,51 @@
+name: Alpine open-vm-tools (VGAuth) build
+
+# VGAuth'lu open-vm-tools apk'sini Alpine'da derler, GH secret'taki anahtarla
+# imzalar ve alpine/v<surum>/ altina commit'ler. Imza ozel anahtari yalniz
+# ALPINE_APK_SIGN_KEY secret'inda (sifreli) durur — hicbir host'ta/kodda degil.
+# Alpine open-vm-tools surumlenince bu workflow'u elle tetikle (yeni surum
+# numarasiyla); customize.go'daki gomulu pubkey ayni anahtarla eslesir.
+
+on:
+  workflow_dispatch:
+    inputs:
+      alpine_version:
+        description: "Alpine surumu (orn. 3.23)"
+        required: true
+        default: "3.23"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Derle + imzala (alpine container)
+        env:
+          AV: ${{ github.event.inputs.alpine_version }}
+          SIGN_KEY: ${{ secrets.ALPINE_APK_SIGN_KEY }}
+        run: |
+          docker run --rm \
+            -e AV \
+            -e SIGN_KEY \
+            -v "$PWD":/work \
+            "alpine:$AV" /bin/sh /work/alpine/build-ovt.sh
+
+      - name: Commit & push
+        env:
+          AV: ${{ github.event.inputs.alpine_version }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git config --global --add safe.directory "$PWD"
+          git add alpine/
+          if git diff --cached --quiet; then
+            echo "Degisiklik yok."
+          else
+            git commit -m "ci: Alpine ${AV} open-vm-tools (VGAuth) apk yeniden derlendi"
+            git push
+          fi
