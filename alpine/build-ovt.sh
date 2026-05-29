@@ -60,5 +60,7 @@ done
 cd "$DEST"
 apk index -o APKINDEX.tar.gz *.apk
 abuild-sign APKINDEX.tar.gz
-cp "$PUB" "/work/alpine/v$AV/builder-6a18ae52.rsa.pub"
+# Yeni surum dizini icin pubkey'i seed et (mevcut surumde $PUB zaten ayni dosya).
+DSTPUB="/work/alpine/v$AV/builder-6a18ae52.rsa.pub"
+[ "$PUB" = "$DSTPUB" ] || cp "$PUB" "$DSTPUB"
 echo "DONE: surum=$VR hedef=$DEST"
