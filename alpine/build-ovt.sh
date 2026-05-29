@@ -29,20 +29,26 @@ cd aports && git sparse-checkout set community/open-vm-tools && cd community/ope
 sed -i 's|openssl-dev>3|openssl-dev>3 linux-pam-dev xmlsec-dev libxml2-dev|' APKBUILD
 sed -i '/--without-pam/d; /--without-xerces/d' APKBUILD
 sed -i '/rm -Rf .*etc\/pam.d/d' APKBUILD
-sed -i 's|^pkgrel=.*|pkgrel=100|' APKBUILD
+sed -i 's|^pkgrel=.*|pkgrel=101|' APKBUILD
 # open-vm-tools-openrc alt paketini KALDIR: bu tek apk, OVA build appliance'inin
 # gittigi Fastly edge'inde tutarli HTTP 404 veriyordu (diger 8 paket ayni Pages
 # dizininden iniyor). Alt paketi listeden cikarinca init.d/open-vm-tools ANA
 # pakete katlanir (abuild default openrc subpackage'i tasimaz) ve install_if
 # kalkar → openrc.apk hic fetch edilmez, 404 imkansiz hale gelir.
 sed -i '/\$pkgname-openrc/d' APKBUILD
-# 2 musl yamasi (Alpine vgauth kapali oldugu icin yamamamis) — prepare() override
+# 3 musl yamasi (Alpine vgauth kapali oldugu icin yamamamis) — prepare() override
 cat >> APKBUILD <<'EOF'
 prepare() {
 	default_prepare
 	cd open-vm-tools
 	sed -i 's|<sys/unistd.h>|<unistd.h>|g' vgauth/lib/netPosix.c vgauth/serviceImpl/netPosix.c
 	sed -i 's|__uint32_t|uint32_t|g; s|__uint64_t|uint64_t|g' vgauth/common/vmxrpc.c
+	# musl fix #3 (KRITIK): generic Linux/GCC VGAUTHERR_FMT64 "%Lu"/"0x%Lx" (long-double
+	# length modifier'i integer'a — standart disi). glibc tolere eder, musl REDDEDER.
+	# Hata cevabi XML'i (VGAUTH_ERROR_FORMAT) bunu kullanir → g_strdup_printf musl'da
+	# NULL doner → packet=NULL → strlen(NULL) segfault (ServiceProtoAddAlias proto.c:1659,
+	# ServiceProtoValidateSamlBearerToken proto.c:2219). "%llu"/"0x%llx" her ikisinde calisir.
+	sed -i 's|"0x%Lx"|"0x%llx"|; s|"%Lu"|"%llu"|' vgauth/public/VGAuthError.h
 	autoreconf -vif
 }
 EOF
