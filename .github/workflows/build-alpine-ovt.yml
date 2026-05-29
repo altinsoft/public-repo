@@ -45,7 +45,15 @@ jobs:
           git add alpine/
           if git diff --cached --quiet; then
             echo "Degisiklik yok."
-          else
-            git commit -m "ci: Alpine ${AV} open-vm-tools (VGAuth) apk yeniden derlendi"
-            git push
+            exit 0
           fi
+          git commit -m "ci: Alpine ${AV} open-vm-tools (VGAuth) apk yeniden derlendi"
+          # Repoda baska push'lar olabilir; rebase + retry ile cakismayi cöz.
+          for i in 1 2 3 4 5; do
+            git push && exit 0
+            echo "push reddedildi, rebase deneme $i..."
+            git pull --rebase --autostash origin main || true
+            sleep 3
+          done
+          echo "push 5 denemede basarisiz" >&2
+          exit 1
